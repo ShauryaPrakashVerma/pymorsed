@@ -15,9 +15,7 @@ def decode(morse_str, language = "english") -> str:
     
     language = language.lower()
     reverse_lookup = build_reverse_lookup(language)
-    
     result = []
-    
     for symbol in morse_str.split():
         if symbol == "/":
             result.append(" ")

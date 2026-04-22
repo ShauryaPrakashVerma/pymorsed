@@ -3,6 +3,7 @@ import soundfile as sf
 import numpy as np
 import matplotlib.pyplot as plt
 from pathlib import Path
+import os
 
 
 
@@ -55,6 +56,9 @@ def play_audio(audio):
     sd.wait()
 
 
+
+# save the output 
+# give user the flexibility to save on a desired location else by default in outputs folder
 def save_audio(audio, filename, fs):
     """
     Save audio array to a file.
@@ -68,7 +72,7 @@ def save_audio(audio, filename, fs):
     output_dir.mkdir(exist_ok=True)
     path = output_dir / filename
     sf.write(path, audio, fs)
-    print("Saved:", path)
+    print("Saving to:", os.getcwd())
 
 
 def plot_waveform(audio, fs):
@@ -84,9 +88,8 @@ def plot_waveform(audio, fs):
 
 
 
-
 if __name__ == "__main__":
-    morse = "... --- ..."
+    morse = "...---.../...---..."
     audio = morse_to_audio(morse)
     play_audio(audio)
     plot_waveform(audio, FS)
