@@ -89,8 +89,8 @@ def plot_waveform(audio, fs):
 
 
 if __name__ == "__main__":
-    morse = "...---.../...---..."
+    morse = "··· ···· ·- ··- ·-· -·-- ·- / ·--· ·-· ·- -·- ·- ··· ···· / ···- · ·-· -- ·-"
     audio = morse_to_audio(morse)
     play_audio(audio)
     plot_waveform(audio, FS)
-    save_audio(audio, "sos.wav", FS)
+    save_audio(audio, "shaurya.wav", FS)
