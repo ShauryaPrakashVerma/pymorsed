@@ -16,16 +16,8 @@ def decode_from_file(filepath):
     WPM = 20
     unit = 1.2 / WPM
     morse = binary_to_morse(binary, fs, unit)
-    print("MORSE:", morse)
-    print(repr(morse))
     text = decode(morse)
     return text
-
-    # In decode_from_file:
-    envelope = compute_envelope(audio)
-    # Use a very small window (e.g., 5-10ms worth of samples)
-    smoothed = smooth_signal(envelope, window_size=int(fs * 0.005)) 
-    binary = to_binary(smoothed)
 
 
 def read_audio_file(filepath):
@@ -34,44 +26,32 @@ def read_audio_file(filepath):
 
 
 def to_mono(audio):
-
     if len(audio.shape) == 2:
         audio = np.mean(audio, axis=1)
-
     return audio
 
+
 def trim_start_auto(audio, threshold=0.01):
-
     indices = np.where(np.abs(audio) > threshold)[0]
-
     if len(indices) == 0:
         return audio
-
     start = indices[0]
-
     return audio[start:]
 
 
-
 def trim_start(audio, fs, seconds=0.2):
-
     samples = int(seconds * fs)
-
     return audio[samples:]
 
 def compute_envelope(audio):
-
     return np.abs(audio)
 
+
 def smooth_signal(signal, window_size=50):
-
     kernel = np.ones(window_size) / window_size
-
     return np.convolve(signal, kernel, mode="same")
 
 def to_binary(signal):
-    # Raising this from 0.3 to 0.6 prevents "bleeding" 
-    # between symbols and letters.
     threshold = np.max(signal) * 0.3
     
     plt.figure()
@@ -80,73 +60,7 @@ def to_binary(signal):
     plt.title("Signal with Threshold")
     plt.show()
     binary = signal > threshold
-    
     return binary
-
-# def binary_to_morse(binary, fs, unit):
-
-#     samples_per_unit = unit * fs
-
-#     morse = []
-#     current_symbol = ""   # buffer for one letter
-#     current = binary[0]
-#     count = 0
-
-#     for value in binary:
-
-#         if value == current:
-#             count += 1
-
-#         else:
-
-#             duration_units = count / samples_per_unit
-
-#             # -------------------------
-#             # SIGNAL
-#             # -------------------------
-
-#             if current == 1:
-
-#                 if duration_units < 2:
-#                     current_symbol += "."
-
-#                 else:
-#                     current_symbol += "-"
-
-#             # -------------------------
-#             # SILENCE
-#             # -------------------------
-
-#             else:
-
-#                 if duration_units >= 6:
-
-#                     if current_symbol:
-#                         morse.append(current_symbol)
-#                         current_symbol = ""
-
-#                     morse.append("/")
-
-#                 elif duration_units >= 2:
-#                     print("Yes")
-#                     if current_symbol:
-#                         morse.append(current_symbol)
-#                         morse.append(" ")
-#                         current_symbol = ""
-
-#                 # else: 
-#                     # morse.append("#")
-
-#             current = value
-#             count = 1
-    
-#     # flush last symbol
-#     if current_symbol:
-#         morse.append(current_symbol)
-
-#     print(morse)
-#     print(" ".join(morse))
-#     return " ".join(morse)
 
 def binary_to_morse(binary, fs, unit):
     samples_per_unit = unit * fs
@@ -160,29 +74,19 @@ def binary_to_morse(binary, fs, unit):
             count += 1
         else:
             duration_units = count / samples_per_unit
-            print( current, duration_units)
-            # print(f"Switch detected! Was signal: {current}, Duration: {duration_units:.2f} units")
             if current == 1:
-                if duration_units < 2.0: # Your dots are ~1.08
+                if duration_units < 2.0:
                     current_symbol += "."
-                else: # Your dashes are ~3.08
+                else:
                     current_symbol += "-"
 
-            # SILENCE (current == False)
             else:
-                # 1. Intra-character gap: ~0.92 units in your log.
-                # We do nothing here, just keep building current_symbol.
                 if duration_units < 1.5: 
                     pass
-
-                # 2. Inter-character gap: ~3.08 units in your log.
-                # THIS is what you need to trigger to get "... --- ..."
                 elif duration_units >= 1.5 and duration_units < 5.0:
                     if current_symbol:
                         morse.append(current_symbol)
                         current_symbol = ""
-
-                # 3. Inter-word gap: ~7.92 units in your log.
                 elif duration_units >= 5.0:
                     if current_symbol:
                         morse.append(current_symbol)
@@ -217,25 +121,16 @@ def record_and_plot():
         samplerate=fs,
         channels=1
     )
-
     sd.wait()
-
     print("Done")
-
-    # Convert to 1D array
     audio = audio.flatten()
-
     time = np.linspace(
         0,
         duration,
         len(audio)
     )
-
     envelope = get_envelope(audio)
     smoothed = smooth_signal(envelope)
-
-    
-    
     plt.figure()
 
     threshold = 0.002
@@ -260,18 +155,15 @@ def record_and_plot():
 
 
 def get_envelope(audio):
-
     return np.abs(audio)
 
 
 
 def trim_start(audio, fs, seconds=0.2):
-
     samples_to_remove = int(seconds * fs)
-
     return audio[samples_to_remove:]
 
 
 if __name__ == '__main__':
-    result = decode_from_file("C:\\Users\\Shaur\\Desktop\\Morse_Code_Library_Python\\src\\Morse_Code_Generator\\output\\shaurya.wav")
+    result = decode_from_file("C:\\Users\\Shaur\\Desktop\\Morse_Code_Library_Python\\src\\Morse_Code_Generator\\output\\hello.wav")
     print(result)

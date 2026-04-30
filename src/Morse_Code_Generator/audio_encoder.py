@@ -40,12 +40,10 @@ def morse_to_audio(morse, wpm=WPM, frequency=FREQ):
             audio_parts.append(generate_silence(unit))
 
         elif symbol == " ":
-            # gap between letters
-            audio_parts.append(generate_silence(3 * unit))
+            audio_parts.append(generate_silence(2 * unit))
 
         elif symbol == "/":
-            # gap between words
-            audio_parts.append(generate_silence(7 * unit))
+            audio_parts.append(generate_silence(6 * unit))
 
     audio_parts.append(generate_silence(10 * unit))
     return np.concatenate(audio_parts)
@@ -54,7 +52,6 @@ def morse_to_audio(morse, wpm=WPM, frequency=FREQ):
 def play_audio(audio):
     sd.play(audio, FS)
     sd.wait()
-
 
 
 # save the output 
@@ -89,8 +86,8 @@ def plot_waveform(audio, fs):
 
 
 if __name__ == "__main__":
-    morse = "··· ···· ·- ··- ·-· -·-- ·- / ·--· ·-· ·- -·- ·- ··· ···· / ···- · ·-· -- ·-"
+    morse = ".... . .-.. .-.. --- / -.- .- .. ... . / .... ---"
     audio = morse_to_audio(morse)
     play_audio(audio)
     plot_waveform(audio, FS)
-    save_audio(audio, "shaurya.wav", FS)
+    save_audio(audio, "hello.wav", FS)
