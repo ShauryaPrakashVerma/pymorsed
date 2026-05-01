@@ -1,7 +1,8 @@
 __pycache__/
 *.pyc
 
-venv/
+# virtual environment named Morse_Code
+Morse_Code/
 .env/
 
 output/
@@ -13,11 +14,10 @@ output/
 
 .pytest_cache/
 
+# Build artifacts
+build/
+dist/
 
-# ----Build artifacts
-# build/
-# dist/
-
-# -----OS files
-# .DS_Store
-# Thumbs.db
+# OS files
+.DS_Store
+Thumbs.db

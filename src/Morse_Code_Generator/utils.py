@@ -6,7 +6,11 @@ from functools import lru_cache
 def load_language(language = "english"):
     language = language.lower()
     
-    data_path = Path(__file__).resolve().parent.parent / "data" / f"{language}.json"
+    data_path = (
+        Path(__file__).resolve().parent
+        / "data"
+        / f"{language}.json"
+    )
     
     with open(data_path, "r", encoding="utf-8") as file:
         return json.load(file)
