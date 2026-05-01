@@ -2,28 +2,18 @@ from Morse_Code_Generator.encoder import encode
 from Morse_Code_Generator.decoder import decode
 from Morse_Code_Generator.utils import load_language
 
-# print("Testing language loading:")
-# print(load_language("english"))
-# print("-----------------------------------------------------------------------------------------------")
-# print(load_language("russian"))
-# print("-----------------------------------------------------------------------------------------------")
-# print(load_language())
-
-# print("\nTesting encoder:")
-# print(encode("SOS"))
-# print(encode("ПРИВЕТ", "russian"))
-# print(encode("123"))
+from Morse_Code_Generator.audio_encoder import (
+    morse_to_audio,
+    play_audio,
+    plot_waveform,
+    save_audio,
+)
 
 
-# print("--------------------------------------------------------")
-# print(decode(".... . .-.. .-.. --- / .-- --- .-. .-.. -..", "english"))
-# print(decode("... --- ..."))
-# print(decode(encode("HELLO WORLD i am shaurya")))
+morse = ".... . .-.. .-.. --- / -.- .- .. ... . / .... ---"
 
-# print("\nTesting Russian:")
+audio = morse_to_audio(morse)
 
-# print(encode("ПРИВЕТ", "russian"))
-# print(decode(".--. .-. .. .-- . -", "russian"))
-
-# print(encode("ПРИВЕТ МИР", "russian"))
-# print(decode(".--. .-. .. .-- . - / -- .. .-.", "russian"))
+play_audio(audio)
+plot_waveform(audio, 44100)
+save_audio(audio, "hello.wav", 44100)
