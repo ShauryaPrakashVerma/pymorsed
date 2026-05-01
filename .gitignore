@@ -1,5 +1,23 @@
 __pycache__/
+*.pyc
+
+venv/
+.env/
+
 output/
 
 *.mp3
 *.wav
+
+*.egg-info/
+
+.pytest_cache/
+
+
+# ----Build artifacts
+# build/
+# dist/
+
+# -----OS files
+# .DS_Store
+# Thumbs.db
