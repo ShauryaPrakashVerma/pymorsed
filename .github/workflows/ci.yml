@@ -7,7 +7,13 @@ on:
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        python-version: ["3.9", "3.10", "3.11", "3.12"]
 
     steps:
       - name: Checkout code
@@ -16,7 +22,14 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
-          python-version: "3.12"
+          python-version: ${{ matrix.python-version }}
+
+          # install depencies on linux
+      - name: Install PortAudio (Linux only)
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y portaudio19-dev
 
       - name: Install dependencies
         run: |
@@ -26,7 +39,7 @@ jobs:
 
       - name: Run tests
         run: |
-          pytest --cov=Morse_Code_Generator
+          pytest --cov=Morse_Code_Generator --cov-report=term-missing
 
       - name: Build package
         run: |
