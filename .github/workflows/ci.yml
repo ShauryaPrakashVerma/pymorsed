@@ -41,6 +41,9 @@ jobs:
         run: |
           pytest --cov=Morse_Code_Generator --cov-report=term-missing
 
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v5
+        
       - name: Build package
         run: |
           python -m build

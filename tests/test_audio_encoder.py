@@ -33,9 +33,17 @@ def test_deterministic_audio_output():
     audio2 = morse_to_audio(morse)
     assert np.array_equal(audio1, audio2)
 
+    
+def test_dot_vs_dash_length():
+    dot = morse_to_audio(".")
+    dash = morse_to_audio("-")
+
+    assert len(dash) > len(dot)
 
 
-
+def test_non_empty_output():
+    audio = morse_to_audio("...")
+    assert len(audio) > 0
 
 # TIMING / WPM BEHAVIOR
 def test_wpm_affects_audio_length():
