@@ -43,6 +43,7 @@ def trim_start(audio, fs, seconds=0.2):
     samples = int(seconds * fs)
     return audio[samples:]
 
+
 def compute_envelope(audio):
     return np.abs(audio)
 
@@ -51,9 +52,9 @@ def smooth_signal(signal, window_size=50):
     kernel = np.ones(window_size) / window_size
     return np.convolve(signal, kernel, mode="same")
 
+
 def to_binary(signal):
     threshold = np.max(signal) * 0.3
-    
     plt.figure()
     plt.plot(signal)
     plt.axhline(threshold)
@@ -61,6 +62,7 @@ def to_binary(signal):
     plt.show()
     binary = signal > threshold
     return binary
+
 
 def binary_to_morse(binary, fs, unit):
     samples_per_unit = unit * fs
@@ -162,8 +164,3 @@ def get_envelope(audio):
 def trim_start(audio, fs, seconds=0.2):
     samples_to_remove = int(seconds * fs)
     return audio[samples_to_remove:]
-
-
-if __name__ == '__main__':
-    result = decode_from_file("C:\\Users\\Shaur\\Desktop\\Morse_Code_Library_Python\\src\\Morse_Code_Generator\\output\\hello.wav")
-    print(result)
