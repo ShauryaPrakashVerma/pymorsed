@@ -113,8 +113,3 @@ def test_binary_to_morse_dash():
     )
     assert "-" in morse
     
-
-def _binary_to_morse(binary, fs, unit):
-
-    if len(binary) == 0:
-        return ""
