@@ -1,8 +1,8 @@
-from Morse_Code_Generator.encoder import encode
-from Morse_Code_Generator.decoder import decode
-from Morse_Code_Generator.utils import load_language
+from pymorsed.encoder import encode
+from pymorsed.decoder import decode
+from pymorsed.utils import load_language
 
-from Morse_Code_Generator.audio_encoder import (
+from pymorsed.audio_encoder import (
     morse_to_audio,
     play_audio,
     plot_waveform,

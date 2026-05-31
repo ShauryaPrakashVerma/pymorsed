@@ -1,4 +1,4 @@
-from Morse_Code_Generator.encoder import encode
+from pymorsed.encoder import encode
 import pytest
 
 

@@ -2,7 +2,7 @@ import os
 import numpy as np
 import pytest
 
-from Morse_Code_Generator.audio_encoder import (
+from pymorsed.audio_encoder import (
     morse_to_audio,
     save_audio,
 )

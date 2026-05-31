@@ -3,7 +3,7 @@ requires = ["setuptools", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "Morse_Code_Generator"
+name = "pymorsed"
 version = "0.1.0"
 description = "Morse code encoder and decoder"
 authors = [{ name = "Shaurya Verma" }]
@@ -29,4 +29,4 @@ package-dir = {"" = "src"}
 where = ["src"]
 
 [tool.setuptools.package-data]
-"Morse_Code_Generator" = ["data/*.json"]
+"pymorsed" = ["data/*.json"]
