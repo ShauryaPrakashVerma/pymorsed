@@ -94,42 +94,73 @@ def _to_binary(signal):
 
 
 def _binary_to_morse(binary, fs, unit):
+    """
+    Convert a binary Morse signal into Morse code symbols.
+
+    Parameters
+        binary : np.ndarray
+            Boolean or binary signal representing Morse tone presence.
+        fs : int
+            Sampling rate of the audio signal.
+        unit : float
+            Duration of one Morse time unit in seconds.
+
+    Output
+        str : Morse code string (e.g. "... --- ...").
+    """
+
+    if len(binary) == 0:
+        return ""
+    
     samples_per_unit = unit * fs
     morse = []
-    current_symbol = ""   # This builds a single letter (e.g., "...")
+    current_symbol = ""
     current = binary[0]
     count = 0
-
     for value in binary:
         if value == current:
             count += 1
-        else:
-            duration_units = count / samples_per_unit
-            if current == 1:
-                if duration_units < 2.0:
-                    current_symbol += "."
-                else:
-                    current_symbol += "-"
+            continue
+
+        duration_units = count / samples_per_unit
+
+        if current:  # Tone ON
+            if duration_units < 2.0:
+                current_symbol += "."
+            else:
+                current_symbol += "-"
+
+        else:  # Tone OFF
+            if duration_units < 1.5:
+                # Gap between dots/dashes within same letter
+                pass
+
+            elif duration_units < 5.0:
+                # Gap between letters
+                if current_symbol:
+                    morse.append(current_symbol)
+                    current_symbol = ""
 
             else:
-                if duration_units < 1.5: 
-                    pass
-                elif duration_units >= 1.5 and duration_units < 5.0:
-                    if current_symbol:
-                        morse.append(current_symbol)
-                        current_symbol = ""
-                elif duration_units >= 5.0:
-                    if current_symbol:
-                        morse.append(current_symbol)
-                        current_symbol = ""
-                    morse.append("/")
+                # Gap between words
+                if current_symbol:
+                    morse.append(current_symbol)
+                    current_symbol = ""
 
-            current = value
-            count = 1
+                morse.append("/")
 
+        current = value
+        count = 1
+
+    duration_units = count / samples_per_unit
+    if current:  # Final tone segment
+        if duration_units < 2.0:
+            current_symbol += "."
+        else:
+            current_symbol += "-"
+            
     if current_symbol:
         morse.append(current_symbol)
-
     return " ".join(morse)
 
 
@@ -179,3 +210,9 @@ def _record_and_plot(span):
 
 def _get_envelope(audio):
     return np.abs(audio)
+
+
+if __name__ == "__main__":
+    filepath = r"C:\\Users\\Shaur\\Desktop\\Morse_Code_Library_Python\\src\\Morse_Code_Generator\\output\\shaurya.wav"
+    
+    print(decode_from_file(filepath))
