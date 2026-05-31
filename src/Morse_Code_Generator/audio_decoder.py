@@ -7,17 +7,60 @@ from .decoder import decode
 
 
 def decode_from_file(filepath):
+    """
+    Decode a Morse code audio file into text.
+
+    Parameters
+        filepath : str or pathlib.Path
+            Path to the input audio file.
+
+    Output
+        str : Decoded text message.
+    """
     audio, fs = _read_audio_file(filepath)
     audio = _to_mono(audio)
+    return _decode_audio(audio, fs)
+
+
+
+def _decode_audio(audio, fs, wpm=20):
+
     audio = _trim_start_auto(audio)
     envelope = _get_envelope(audio)
     smoothed = _smooth_signal(envelope)
     binary = _to_binary(smoothed)
-    WPM = 20
-    unit = 1.2 / WPM
-    morse = _binary_to_morse(binary, fs, unit)
-    text = decode(morse)
-    return text
+    unit = 1.2 / wpm
+    morse = _binary_to_morse(
+        binary,
+        fs,
+        unit
+    )
+    return decode(morse)
+
+
+
+# TODO (v0.2.0):
+# Implement microphone-based Morse decoding.
+# Challenges:
+# - Automatic WPM estimation
+# - Noise filtering
+# - Robust threshold detection
+# - Hardware-independent testing
+
+
+def decode_from_microphone(duration=5):
+    raise NotImplementedError(
+        "Microphone decoding will be added in v0.2.0."
+    )
+    # fs = 44100
+    # audio = sd.rec(
+    #     int(duration * fs),
+    #     samplerate=fs,
+    #     channels=1
+    # )
+    # sd.wait()
+    # audio = audio.flatten()
+    # return _decode_audio(audio, fs)
 
 
 def _read_audio_file(filepath):
@@ -46,11 +89,6 @@ def _smooth_signal(signal, window_size=50):
 
 def _to_binary(signal):
     threshold = np.max(signal) * 0.3
-    # plt.figure()
-    # plt.plot(signal)
-    # plt.axhline(threshold)
-    # plt.title("Signal with Threshold")
-    # plt.show()
     binary = signal > threshold
     return binary
 
@@ -95,17 +133,10 @@ def _binary_to_morse(binary, fs, unit):
     return " ".join(morse)
 
 
-def decode_from_microphone():
-    fs = 44100
-    duration = 5
-    audio = sd.rec( int(duration * fs), samplerate = fs, channels = 1)
-    sd.wait()
-    print(type(audio))
 
-
-def record_and_plot():
+def _record_and_plot(span):
     fs = 44100
-    duration = 3
+    duration = span
 
     print("Recording...")
 
@@ -148,58 +179,3 @@ def record_and_plot():
 
 def _get_envelope(audio):
     return np.abs(audio)
-
-
-if __name__ == "__main__":
-    filepath = r"C:\\Users\\Shaur\\Desktop\\Morse_Code_Library_Python\\src\\Morse_Code_Generator\\output\\shaurya.wav"
-
-    print("Reading audio...")
-    audio, fs = _read_audio_file(filepath)
-    print(f"Sample Rate: {fs}")
-    print(f"Audio Shape: {audio.shape}")
-
-    audio = _to_mono(audio)
-    print(f"After mono conversion: {audio.shape}")
-
-    audio = _trim_start_auto(audio)
-    print(f"After trimming: {len(audio)} samples")
-
-    envelope = _get_envelope(audio)
-    print(f"Envelope Length: {len(envelope)}")
-
-    smoothed = _smooth_signal(envelope)
-    print(f"Smoothed Length: {len(smoothed)}")
-
-    binary = _to_binary(smoothed)
-    print(f"Binary Length: {len(binary)}")
-
-    unit = 1.2 / 20
-
-    morse = _binary_to_morse(binary, fs, unit)
-    print(f"Morse Decoded: {morse}")
-
-    text = decode(morse)
-    print(f"Text Decoded: {text}")
-    
-    
-    
-    
-    decode_from_microphone()
-    
-    # print("=" * 50)
-    # print("Testing record_and_plot()")
-    # print("Speak into the microphone for 3 seconds...")
-    # print("=" * 50)
-
-    # try:
-    #     record_and_plot()
-
-    #     print("\nChecks:")
-    #     print("[✓] Audio recording completed")
-    #     print("[✓] Envelope computed")
-    #     print("[✓] Signal smoothed")
-    #     print("[✓] Binary signal generated")
-    #     print("[✓] Plots displayed")
-
-    # except Exception as e:
-    #     print(f"\n[✗] Test failed: {e}")
