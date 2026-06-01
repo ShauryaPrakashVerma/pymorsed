@@ -6,6 +6,11 @@ import matplotlib.pyplot as plt
 from .decoder import decode
 
 
+__all__ = [
+    "decode_from_file",
+    "decode_from_microphone"
+]
+
 def decode_from_file(filepath):
     """
     Decode a Morse code audio file into text.
