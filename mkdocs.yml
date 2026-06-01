@@ -1,0 +1,28 @@
+site_name: pymorsed
+
+nav:
+  - Home: index.md
+
+  - Getting Started:
+      - Installation: installation.md
+      - Quick Start: usage.md
+
+  - Reference:
+      - API: api.md
+      - Project Structure: project_structure.md
+
+  - Contributing: contributing.md
+    
+theme:
+  name: material
+
+markdown_extensions:
+  - toc
+  - tables
+  - admonition
+  - fenced_code
+  - pymdownx.highlight
+  - pymdownx.superfences
+
+repo_url: https://github.com/ShauryaPrakashVerma/pymorsed
+repo_name: pymorsed
