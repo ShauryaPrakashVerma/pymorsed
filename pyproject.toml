@@ -5,8 +5,8 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "pymorsed"
 version = "0.1.0"
-description = "Morse code encoder and decoder"
-authors = [{ name = "Shaurya Verma" }]
+description = "Encode, decode, generate, and analyze Morse code audio signals in Python."
+authors = [{ name = "Shaurya Prakash Verma", email = "shauryapv@gmail.com"}]
 readme = "README.md"
 license = { file = "LICENSE" }
 requires-python = ">=3.8"
@@ -30,3 +30,8 @@ where = ["src"]
 
 [tool.setuptools.package-data]
 "pymorsed" = ["data/*.json"]
+
+[project.urls]
+Homepage = "https://github.com/ShauryaPrakashVerma/pymorsed"
+Repository = "https://github.com/ShauryaPrakashVerma/pymorsed"
+Issues = "https://github.com/ShauryaPrakashVerma/pymorsed/issues"
