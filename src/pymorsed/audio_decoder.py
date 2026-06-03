@@ -215,9 +215,3 @@ def _record_and_plot(span):
 
 def _get_envelope(audio):
     return np.abs(audio)
-
-
-if __name__ == "__main__":
-    filepath = r"C:\\Users\\Shaur\\Desktop\\Morse_Code_Library_Python\\src\\Morse_Code_Generator\\output\\shaurya.wav"
-    
-    print(decode_from_file(filepath))

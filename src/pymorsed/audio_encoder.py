@@ -86,11 +86,3 @@ def plot_waveform(audio, fs):
     plt.grid()
     plt.show()
 
-
-
-if __name__ == "__main__":
-    morse = ".... . .-.. .-.. --- / -.- .- .. ... . / .... ---"
-    audio = morse_to_audio(morse)
-    play_audio(audio)
-    plot_waveform(audio, FS)
-    save_audio(audio, "hello.wav", FS)

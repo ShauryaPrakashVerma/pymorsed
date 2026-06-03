@@ -25,8 +25,3 @@ def decode(morse_str, language = "english") -> str:
             raise ValueError(f"Morse '{symbol}' not recognized")
 
     return "".join(result)
-
-
-if __name__ == "__main__":
-    result = decode("... --- ... / ... --- ...")
-    print(result)
