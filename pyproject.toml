@@ -44,4 +44,5 @@ where = ["src"]
 [project.urls]
 Homepage = "https://github.com/ShauryaPrakashVerma/pymorsed"
 Repository = "https://github.com/ShauryaPrakashVerma/pymorsed"
+Documentation = "https://shauryaprakashverma.github.io/pymorsed/"
 Issues = "https://github.com/ShauryaPrakashVerma/pymorsed/issues"

@@ -8,7 +8,7 @@ nav:
       - Quick Start: usage.md
 
   - Reference:
-      - API: api.md
+      - Function Usage: api.md
       - Project Structure: project_structure.md
 
   - Contributing: contributing.md

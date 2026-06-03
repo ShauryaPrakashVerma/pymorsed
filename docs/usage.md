@@ -12,11 +12,92 @@ text = decode(morse)
 print(text)
 ```
 
+
+
+
+---
+## Morse Code Spacing Rules
+
+pymorsed follows standard Morse code spacing conventions when encoding and decoding messages.
+
+### Letter Separation
+
+Individual Morse symbols within a letter are written together without spaces.
+
+Examples:
+
+| Character | Morse Code |
+| --------- | ---------- |
+| A         | `.-`       |
+| B         | `-...`     |
+| S         | `...`      |
+| O         | `---`      |
+
+---
+
+### Word Separation
+
+Letters are separated by a single space.
+
+Example:
+
+```text
+HELLO
+```
+
+becomes:
+
+```text
+.... . .-.. .-.. ---
+```
+
+Notice that each Morse letter is separated by one space.
+
+---
+
+### Multiple Words
+
+Words are separated using the forward slash character (`/`).
+
+Example:
+
+```text
+HELLO WORLD
+```
+
+becomes:
+
+```text
+.... . .-.. .-.. --- / .-- --- .-. .-.. -..
+```
+
+The slash represents a word boundary.
+
+---
+
+### Summary
+
+| Morse Pattern | Meaning           |
+| ------------- | ----------------- |
+| `.`           | Dot               |
+| `-`           | Dash              |
+| Space (` `)   | Separates letters |
+| Slash (`/`)   | Separates words   |
+
+!!! note
+
+```
+When manually providing Morse code to `decode()`, use a single space between letters and a forward slash (`/`) between words.
+```
+
+
+
 ---
 
 ## Import Individual Modules
 
 You can also import functionality from specific modules.
+
 
 ### Text Encoding
 

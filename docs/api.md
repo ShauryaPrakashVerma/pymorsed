@@ -88,49 +88,6 @@ HELLO
 
 ---
 
-# Audio Encoder Module
-
-```python
-from pymorsed.audio_encoder import (
-    morse_to_audio,
-    play_audio,
-    save_audio,
-    plot_waveform
-)
-```
-
----
-
-## `morse_to_audio(morse, wpm=20, frequency=700)`
-
-Generates a Morse code audio signal as a NumPy array.
-
-### Parameters
-
-| Parameter   | Type  | Description                            |
-| ----------- | ----- | -------------------------------------- |
-| `morse`     | `str` | Morse code string                      |
-| `wpm`       | `int` | Transmission speed in words per minute |
-| `frequency` | `int` | Tone frequency in Hertz                |
-
-### Returns
-
-```python
-numpy.ndarray
-```
-
-Generated waveform.
-
-### Example
-
-```python
-from pymorsed.audio_encoder import morse_to_audio
-
-audio = morse_to_audio("... --- ...")
-```
-
----
-
 ## `play_audio(audio)`
 
 Plays a generated Morse code waveform through the system speakers.
@@ -276,52 +233,6 @@ RuntimeError
 ```
 
 If decoding fails due to invalid audio data.
-
----
-
-# Utilities Module
-
-```python
-from pymorsed.utils import load_language
-```
-
----
-
-## `load_language(language)`
-
-Loads a language mapping file.
-
-### Parameters
-
-| Parameter  | Type  |
-| ---------- | ----- |
-| `language` | `str` |
-
-### Returns
-
-```python
-dict
-```
-
-Dictionary containing character-to-Morse mappings.
-
-### Example
-
-```python
-from pymorsed.utils import load_language
-
-mapping = load_language("english")
-
-print(mapping["A"])
-```
-
-Output:
-
-```text
-.-
-```
-
----
 
 # Top-Level Imports
 
