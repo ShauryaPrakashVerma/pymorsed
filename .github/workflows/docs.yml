@@ -1,0 +1,30 @@
+name: Deploy Documentation
+
+on:
+    push:
+        branches: [main]
+
+permissions:
+    contents: write
+
+jobs:
+    deploy:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout Repository
+              uses: actions/checkout@v5
+
+            - name: Setup Python
+              uses: actions/setup-python@v5
+              with:
+                python-version: "3.12"
+
+            - name: Install Documentation Dependencies
+              run: |
+                pip install mkdocs
+                pip install mkdocs-material
+
+            - name: Deploy Documentation
+              run: mkdocs gh-deploy --force
+

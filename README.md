@@ -79,6 +79,7 @@ from pymorsed.audio_encoder import morse_to_audio
 
 morse = encode("SOS")
 audio = morse_to_audio(morse)
+play_audio(audio)
 ```
 
 ---
