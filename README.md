@@ -6,6 +6,8 @@ A Python library for encoding, decoding, generating, and analyzing Morse code au
 
 📖 Documentation: https://shauryaprakashverma.github.io/pymorsed/
 
+<br>
+
 ## Features
 
 * Convert text to Morse code
@@ -31,6 +33,8 @@ pip install pymorsed
 ```
 
 ---
+
+<br>
 
 ## Quick Start
 
