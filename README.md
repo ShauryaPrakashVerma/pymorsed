@@ -2,6 +2,10 @@
 
 A Python library for encoding, decoding, generating, and analyzing Morse code audio signals.
 
+📦 PyPI: https://pypi.org/project/pymorsed/
+
+📖 Documentation: https://shauryaprakashverma.github.io/pymorsed/
+
 ## Features
 
 * Convert text to Morse code
@@ -17,13 +21,6 @@ A Python library for encoding, decoding, generating, and analyzing Morse code au
 * Fully tested with automated CI pipeline
 
 
-
-
-<br>
-
-# Documentation
-
-Full documentation is available at : https://shauryaprakashverma.github.io/pymorsed/
 
 <br>
 
