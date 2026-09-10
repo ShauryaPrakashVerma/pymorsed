@@ -19,13 +19,18 @@ A Python library for Morse code processing, supporting text encoding/decoding, m
 </p>
 
 
-<p align="left">
+<!-- <p align="left">
   <a href="https://pepy.tech/projects/pymorsed">
     <img src="https://static.pepy.tech/personalized-badge/pymorsed?period=total&units=INTERNATIONAL_SYSTEM&left_color=GREY&right_color=BLUE&left_text=downloads" alt="PyPI Downloads">
   </a>
+  &nbsp;
   <a href="https://badge.fury.io/py/pymorsed">
     <img src="https://badge.fury.io/py/pymorsed.svg" alt="PyPI version" height="20">
   </a>
+</p> -->
+
+<p align="left">
+  <a href="https://pepy.tech/projects/pymorsed"><img src="https://static.pepy.tech/personalized-badge/pymorsed?period=total&units=INTERNATIONAL_SYSTEM&left_color=GREY&right_color=BLUE&left_text=downloads" alt="PyPI Downloads" height="20"></a>&nbsp;&nbsp;<a href="https://badge.fury.io/py/pymorsed"><img src="https://badge.fury.io/py/pymorsed.svg" alt="PyPI version" height="20"></a>
 </p>
 
 
